@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bolsa de Valores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/moment"></script>
+  <style>
+    .container { margin-top: 60px; }
+    .fa { cursor: pointer; }
+  </style>
+  <script>
+    var acoes = [
+      {
+        papel: 'VVAR3.SAO',
+        qtd: 20,
+        valorPago: 9.38,
+      },
+      {
+        papel: 'MGLU3.SAO',
+        qtd: 80,
+        valorPago: 48.12,
+      },
+      {
+        papel: 'B3SA3.SAO',
+        qtd: 10,
+        valorPago: 11.95,
+      },
+      {
+        papel: 'ELET3.SAO',
+        qtd: 12,
+        valorPago: 54.65,
+      },
+      {
+        papel: 'SANB11.SAO',
+        qtd: 240,
+        valorPago: 19.80,
+      }
+    ]
+
+    $(function() {
+      acoes.forEach((el, i) => {
+        $.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${el.papel}&interval=1min&outputsize=full&apikey=0244`, function(data) {
+
+          var obj = data['Time Series (1min)'];
+          for (var k in obj) {
+            var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+            $("#table").find('tbody')
+              .append($('<tr>')
+                .append($('<td>').append($('<p>').text(el.papel)))
+                .append($('<td>').append($('<p>').text(moment(data['Meta Data']["3. Last Refreshed"]).format("DD/MM HH:mm"))))
+                .append($('<td>').append($('<p>').text('R$ ' + v.toFixed(2))))
+                .append($('<td>').append($(`<p class="percentual_${i}">`).text((100 - (el.valorPago / v * 100)).toFixed(2) + '%')))
+                .append($('<td>').append($('<p>').text(el.qtd)))
+                .append($('<td>').append($('<p>').text('R$ ' + el.valorPago)))
+                .append($('<td>').append($('<p>').text('R$ ' + (el.qtd * el.valorPago).toFixed(2))))
+                .append($('<td>').append($(`<p class="saldo_${i}">`).text('R$ ' + (v * el.qtd - (el.qtd * el.valorPago)).toFixed(2))))
+                .append($('<td>').append($('<i>').addClass('fa fa-shopping-cart')))
+              )
+
+              if (100 - (el.valorPago / v * 100) > 0) {
+                $(`.percentual_${i}`).css("color", "green");
+              } else {
+                $(`.percentual_${i}`).css("color", "red");
+              }
+
+              if (v * el.qtd - (el.qtd * el.valorPago) > 0) {
+                $(`.saldo_${i}`).css("color", "green");
+              } else {
+                $(`.saldo_${i}`).css("color", "red");
+              }
+              break;
+          }
+        });
+      });
+
+      setTimeout(function(){
+        location = ''
+      }, 60000)
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Bolsa de Valores</h2>
+    <p>Protótipo simples para demonstração de acompanhamento de papéis</p>            
+    <table id="table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Papel</th>
+          <th>Atualizado</th>
+          <th>Preço</th>
+          <th>Percentual</th>
+          <th>Qtd</th>
+          <th>Valor Pago</th>
+          <th>Total Pago</th>
+          <th>Saldo</th>
+          <th>Alarme</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
