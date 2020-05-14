@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    .container { margin-top: 60px; }
+  </style>
+  <script>
+    $.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=VVAR3.SAO&interval=1min&outputsize=full&apikey=0244', function(data) {
+      var obj = data['Time Series (1min)'];
+      var valorPago = 9.38;
+      var qtd = 20;
+      
+      for (var k in obj) { 
+        var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+        $(".preco").last().html('R$ ' + v.toFixed(2));
+        $(".valor-pago").last().html('R$ ' + valorPago);
+        $(".qtd").last().html(qtd);
+        $(".valor-pago-total").last().html('R$ ' + (qtd * valorPago).toFixed(2));
+        $(".percentual").last().html((100 - (valorPago / v * 100)).toFixed(2) + '%');
+        if (100 - (valorPago / v * 100) > 0) {
+          $(".percentual").css("color", "green");
+        } else {
+          $(".percentual").css("color", "red");
+        }
+        $(".saldo").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        $(".saldo").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        if (v * qtd - (qtd * valorPago) > 0) {
+          $(".saldo").css("color", "green");
+        } else {
+          $(".saldo").css("color", "red");
+        }
+
+        break; 
+      } 
+    });
+
+    $.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MGLU3.SAO&interval=1min&outputsize=full&apikey=0244', function(data) {
+      var obj = data['Time Series (1min)'];
+      var valorPago = 54.51;
+      var qtd = 10;
+      
+      for (var k in obj) { 
+        var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+        $(".preco2").last().html('R$ ' + v.toFixed(2));
+        $(".valor-pago2").last().html('R$ ' + valorPago);
+        $(".qtd2").last().html(qtd);
+        $(".valor-pago-total2").last().html('R$ ' + (qtd * valorPago).toFixed(2));
+        $(".percentual2").last().html((100 - (valorPago / v * 100)).toFixed(2) + '%');
+        if (100 - (valorPago / v * 100) > 0) {
+          $(".percentual2").css("color", "green");
+        } else {
+          $(".percentual2").css("color", "red");
+        }
+        $(".saldo2").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        $(".saldo2").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        if (v * qtd - (qtd * valorPago) > 0) {
+          $(".saldo2").css("color", "green");
+        } else {
+          $(".saldo2").css("color", "red");
+        }
+
+        break; 
+      } 
+    });
+
+    $.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=B3SA3.SAO&interval=1min&outputsize=full&apikey=0244', function(data) {
+      var obj = data['Time Series (1min)'];
+      var valorPago = 34.99;
+      var qtd = 15;
+      
+      for (var k in obj) { 
+        var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+        $(".preco3").last().html('R$ ' + v.toFixed(2));
+        $(".valor-pago3").last().html('R$ ' + valorPago);
+        $(".qtd3").last().html(qtd);
+        $(".valor-pago-total3").last().html('R$ ' + (qtd * valorPago).toFixed(2));
+        $(".percentual3").last().html((100 - (valorPago / v * 100)).toFixed(2) + '%');
+        if (100 - (valorPago / v * 100) > 0) {
+          $(".percentual3").css("color", "green");
+        } else {
+          $(".percentual3").css("color", "red");
+        }
+        $(".saldo3").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        $(".saldo3").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        if (v * qtd - (qtd * valorPago) > 0) {
+          $(".saldo3").css("color", "green");
+        } else {
+          $(".saldo3").css("color", "red");
+        }
+
+        break; 
+      } 
+    });
+
+    $.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=ELET3.SAO&interval=1min&outputsize=full&apikey=0244', function(data) {
+      var obj = data['Time Series (1min)'];
+      var valorPago = 19.99;
+      var qtd = 60;
+      
+      for (var k in obj) { 
+        var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+        $(".preco4").last().html('R$ ' + v.toFixed(2));
+        $(".valor-pago4").last().html('R$ ' + valorPago);
+        $(".qtd4").last().html(qtd);
+        $(".valor-pago-total4").last().html('R$ ' + (qtd * valorPago).toFixed(2));
+        $(".percentual4").last().html((100 - (valorPago / v * 100)).toFixed(2) + '%');
+        if (100 - (valorPago / v * 100) > 0) {
+          $(".percentual4").css("color", "green");
+        } else {
+          $(".percentual4").css("color", "red");
+        }
+        $(".saldo4").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        $(".saldo4").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        if (v * qtd - (qtd * valorPago) > 0) {
+          $(".saldo4").css("color", "green");
+        } else {
+          $(".saldo4").css("color", "red");
+        }
+
+        break; 
+      } 
+    });
+
+    $.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=SANB11.SAO&interval=1min&outputsize=full&apikey=0244', function(data) {
+      var obj = data['Time Series (1min)'];
+      var valorPago = 23.15;
+      var qtd = 345;
+      
+      for (var k in obj) { 
+        var v = Number(data['Time Series (1min)'][k]["4. close"]);
+
+        $(".preco5").last().html('R$ ' + v.toFixed(2));
+        $(".valor-pago5").last().html('R$ ' + valorPago);
+        $(".qtd5").last().html(qtd);
+        $(".valor-pago-total5").last().html('R$ ' + (qtd * valorPago).toFixed(2));
+        $(".percentual5").last().html((100 - (valorPago / v * 100)).toFixed(2) + '%');
+        if (100 - (valorPago / v * 100) > 0) {
+          $(".percentual5").css("color", "green");
+        } else {
+          $(".percentual5").css("color", "red");
+        }
+        $(".saldo5").last().html('R$ ' + (v * qtd - (qtd * valorPago)).toFixed(2));
+        if (v * qtd - (qtd * valorPago) > 0) {
+          $(".saldo5").css("color", "green");
+        } else {
+          $(".saldo5").css("color", "red");
+        }
+
+        break; 
+      } 
+    });
+
+    setTimeout(function(){
+      location = 'index.html'
+    }, 60000)
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Bolsa de Valores</h2>
+    <p>Protótipo simples para demonstração de acompanhamento de papéis</p>            
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Papel</th>
+          <th>Preço</th>
+          <th>Percentual</th>
+          <th>Qtd</th>
+          <th>Valor Pago</th>
+          <th>Total Pago</th>
+          <th>Saldo</th>
+          <th>Alarme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>VVAR3</td>
+          <td><p class="preco">...</p></td>
+          <td><p class="percentual">...</p></td>
+          <td><p class="qtd">...</p></td>
+          <td><p class="valor-pago">...</p></td>
+          <td><p class="valor-pago-total">...</p></td>
+          <td><p class="saldo">...</p></td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td>MGLU</td>
+          <td><p class="preco2">...</p></td>
+          <td><p class="percentual2">...</p></td>
+          <td><p class="qtd2">...</p></td>
+          <td><p class="valor-pago2">...</p></td>
+          <td><p class="valor-pago-total2">...</p></td>
+          <td><p class="saldo2">...</p></td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td>B3SA3</td>
+          <td><p class="preco3">...</p></td>
+          <td><p class="percentual3">...</p></td>
+          <td><p class="qtd3">...</p></td>
+          <td><p class="valor-pago3">...</p></td>
+          <td><p class="valor-pago-total3">...</p></td>
+          <td><p class="saldo3">...</p></td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td>ELET4</td>
+          <td><p class="preco4">...</p></td>
+          <td><p class="percentual4">...</p></td>
+          <td><p class="qtd4">...</p></td>
+          <td><p class="valor-pago4">...</p></td>
+          <td><p class="valor-pago-total4">...</p></td>
+          <td><p class="saldo4">...</p></td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td>SANB11</td>
+          <td><p class="preco5">...</p></td>
+          <td><p class="percentual5">...</p></td>
+          <td><p class="qtd5">...</p></td>
+          <td><p class="valor-pago5">...</p></td>
+          <td><p class="valor-pago-total5">...</p></td>
+          <td><p class="saldo5">...</p></td>
+          <td>Não</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
